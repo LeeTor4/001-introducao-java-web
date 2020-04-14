@@ -1,6 +1,7 @@
 <%@ page import="java.util.List" %>
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="br.uece.eesdevop.introducaojavaweb.Book" %>
+<%@ page import="br.uece.eesdevop.introducaojavaweb.dao.Banco" %>
 <%--
   Created by IntelliJ IDEA.
   User: wellingtonpereira
@@ -18,20 +19,22 @@
         <br/>
         <table border="1px">
             <%
-                List<Book> books = new ArrayList<>();
-
-                books.add(new Book("Book One", "Lorem Ipsum"));
-                books.add(new Book("Book Two", "Lorem Ipsum"));
-                books.add(new Book("Book Three", "Lorem Ipsum"));
-
+                Banco banco = new Banco();
+                List<Book> books = banco.getLista();
+            
                 for (Book book : books) { %>
                     <tr>
                         <td><%=book.getTitle() %></td>
                         <td><%=book.getAuthor() %></td>
+                        <td><%=book.getLaunchYear() %></td>
                     </tr>
             <%
                 }
             %>
         </table>
+        <br/>
+        <form action="/introducao-java-web/adiciona-livros.html" >
+            <input type="submit" value="Gravar" />
+        </form>         
     </body>
 </html>
